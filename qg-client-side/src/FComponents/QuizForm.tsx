@@ -16,14 +16,14 @@ export const QuizForm: React.FC = () => {
 
     return (
         <div>
-            <Container maxWidth="sm">
+            <Container>
                 <TextField
                 id="standard-textarea"
                 label="Quiz Name"
                 {...name.bind}
                 />
             </Container>
-            <Container maxWidth="sm">
+            <Container>
                 <TextField
                 id="standard-textarea"
                 label="Answers"
