@@ -1,21 +1,41 @@
 import React from "react";
+// import { makeStyles } from '@material-ui/core/styles';
+import { TextField, Container, Button } from '@material-ui/core';
+
 import { useInput } from "./useInput";
 
-export const QuizForm: React.FC = () => {
-    const firstNameInput= useInput('');
-    const lastNameInput = useInput('');
 
-    const handleSubmit = (e : React.ChangeEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        alert(`Submitting Name ${firstNameInput.value}, ${lastNameInput.value}`);
-        firstNameInput.reset(); lastNameInput.reset();
+export const QuizForm: React.FC = () => {
+    const name = useInput('');
+    const answers = useInput('');
+
+    const handleSubmit = () => {
+        alert(`Submitting Form: Name of Quiz: ${name.value}, with answers: ${answers.value}`);
+        answers.reset(); name.reset();
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="First name" {...firstNameInput.bind}/>
-            <input type="text" placeholder="Last name" {...lastNameInput.bind}/>
-            <input type="submit" value="Submit" />
-        </form>
+        <div>
+            <Container maxWidth="sm">
+                <TextField
+                id="standard-textarea"
+                label="Quiz Name"
+                {...name.bind}
+                />
+            </Container>
+            <Container maxWidth="sm">
+                <TextField
+                id="standard-textarea"
+                label="Answers"
+                {...answers.bind}
+                multiline
+                />
+            </Container>
+            <Container>
+                <Button variant="contained" color="primary" onClick={handleSubmit}>
+                    Submit
+                </Button>
+            </Container>
+        </div>
     )
 }
