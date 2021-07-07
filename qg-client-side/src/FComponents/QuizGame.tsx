@@ -1,10 +1,13 @@
-import { render } from "@testing-library/react";
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import io from 'socket.io-client';
 import { TextField, Container, Button } from '@material-ui/core';
 import { useInput } from "./useInput";
 
-export const QuizGame = () => {
+const socket = io('http://localhost:8000');
+
+interface Props {}
+
+export const QuizGame: React.FC<Props> = () => {
     const word = useInput("");
     const data = [
         "attach",
@@ -18,10 +21,15 @@ export const QuizGame = () => {
         "chilly",
         "wrist",
         "left",
-        "powerful"
+        "powerful",
+        "mappu"
     ];
     const [display, setDisplay] = useState<number[]>(new Array(data.length).fill(0));
+    useEffect(() => {
+        socket.on('found-answer', () => {
 
+        })
+    })
     function handleSubmit() {
         let match = -1;
         data.forEach((text, i) => {
@@ -69,7 +77,7 @@ export const QuizGame = () => {
             {data.map((row, i) => {
                 return (
                 <tr>
-                    <td>{display[i] === 0 ? "Locked" : row}</td>
+                    <td>{display[i] === 0 ? "--Locked--" : row}</td>
                 </tr>
                 )
             })}
